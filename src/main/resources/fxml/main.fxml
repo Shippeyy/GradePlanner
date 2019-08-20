@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="julianpraesent.gradeplanner.ui.Controller">
+   <children>
+      <MenuBar>
+         <menus>
+            <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="New" />
+                  <MenuItem mnemonicParsing="false" text="Open…" />
+                  <Menu mnemonicParsing="false" text="Open Recent" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Close" />
+                  <MenuItem mnemonicParsing="false" text="Save" />
+                  <MenuItem mnemonicParsing="false" text="Save As…" />
+                  <MenuItem mnemonicParsing="false" text="Revert" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Preferences…" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Quit" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Edit">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Undo" />
+                  <MenuItem mnemonicParsing="false" text="Redo" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Cut" />
+                  <MenuItem mnemonicParsing="false" text="Copy" />
+                  <MenuItem mnemonicParsing="false" text="Paste" />
+                  <MenuItem mnemonicParsing="false" text="Delete" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Select All" />
+                  <MenuItem mnemonicParsing="false" text="Unselect All" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <SplitPane dividerPositions="0.6703786191536748" prefHeight="550.0" prefWidth="900.0">
+        <items>
+            <ListView id="lv_courses" prefHeight="548.0" prefWidth="576.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="245.0" prefWidth="405.0">
+               <children>
+                  <Label id="lbl_courseTitle" layoutX="134.0" layoutY="11.0" text="EP2" />
+                  <Label id="lbl_type" layoutX="14.0" layoutY="48.0" text="Type" />
+                  <TextField id="tf_title" layoutX="110.0" layoutY="85.0" text="EP2" />
+                  <Label id="lbl_title" layoutX="14.0" layoutY="90.0" text="Title" />
+                  <ChoiceBox id="choicebox_type" layoutX="111.0" layoutY="43.0" prefHeight="27.0" prefWidth="166.0" />
+                  <Label id="lbl_ects" layoutX="14.0" layoutY="134.0" text="ECTS" />
+                  <TextField id="tf_ects" layoutX="110.0" layoutY="126.0" text="7" />
+                  <TextField id="tf_grade" layoutX="110.0" layoutY="167.0" text="2" />
+                  <Label id="lbl_grade" layoutX="14.0" layoutY="175.0" text="Grade" />
+                  <CheckBox id="chb_lock" layoutX="17.0" layoutY="212.0" mnemonicParsing="false" text="lock grade" />
+                  <CheckBox id="chb_graded" layoutX="18.0" layoutY="248.0" mnemonicParsing="false" text="graded" />
+                  <Button id="btn_save" layoutX="212.0" layoutY="208.0" mnemonicParsing="false" onAction="#exportCourses" text="Save" />
+                  <Separator layoutX="52.0" layoutY="279.0" prefHeight="1.0" prefWidth="200.0" />
+                  <Pane layoutX="3.0" layoutY="504.0" prefHeight="44.0" prefWidth="292.0" style="-fx-background-color: White;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="504.0">
+                     <children>
+                        <Button id="btn_newCourse" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" text="New Course" />
+                        <Button id="btn_import" layoutX="117.0" layoutY="9.0" mnemonicParsing="false" text="Import" />
+                        <Button id="btn_export" layoutX="191.0" layoutY="9.0" mnemonicParsing="false" text="Export" />
+                     </children>
+                  </Pane>
+                  <Button id="btn_delete" layoutX="207.0" layoutY="244.0" mnemonicParsing="false" onAction="#importCourses" text="Delete" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+         <children>
+            <Label id="lbl_avg" maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Weighted Grade Average: 5.0000" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="11.0" fx:id="x3" />
+               </font>
+               <textFill>
+                  <Color blue="0.625" green="0.625" red="0.625" fx:id="x4" />
+               </textFill>
+            </Label>
+            <Separator orientation="VERTICAL" prefHeight="10.0" />
+            <Label id="lbl_totalEcts" font="$x3" maxWidth="-1.0" text="Total ECTS: 180" textFill="$x4" HBox.hgrow="NEVER" />
+         </children>
+         <padding>
+            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+         </padding>
+      </HBox>
+   </children>
+</VBox>
