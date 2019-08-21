@@ -12,6 +12,7 @@
              <Menu mnemonicParsing="false" text="Data">
                <items>
                    <MenuItem mnemonicParsing="false" onAction="#createCourse" text="Create Course"/>
+                   <MenuItem mnemonicParsing="false" onAction="#anaylzeCourses" text="Analyze Courses"/>
                    <MenuItem mnemonicParsing="false" onAction="#importCourses" text="Import"/>
                    <MenuItem mnemonicParsing="false" onAction="#exportCourses" text="Export"/>
                   <SeparatorMenuItem mnemonicParsing="false" />
@@ -58,6 +59,9 @@
                    <Button id="btn_save" layoutX="212.0" layoutY="208.0" mnemonicParsing="false" text="Save"/>
                   <Separator layoutX="52.0" layoutY="279.0" prefHeight="1.0" prefWidth="200.0" />
                    <Button id="btn_delete" layoutX="207.0" layoutY="244.0" mnemonicParsing="false" text="Delete"/>
+                   <TextArea fx:id="txta_log" editable="false" layoutX="12.0" layoutY="310.0" prefHeight="224.0"
+                             prefWidth="267.0"/>
+                   <Label layoutX="135.0" layoutY="286.0" text="Log"/>
                </children>
             </AnchorPane>
         </items>

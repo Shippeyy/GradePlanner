@@ -11,18 +11,6 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        // TODO: remove
-        /*
-        ArrayList<Course> courses = DataHandler.loadFile(AppConstants.PATH);
-
-        try {
-            ArrayList<Course> optimizedCourses = Analyzer.analyzeCourses(courses, 1);
-            DataHandler.writeFile(optimizedCourses, AppConstants.PATH);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        */
         launch(args);
     }
 
