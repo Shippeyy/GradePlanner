@@ -2,25 +2,24 @@ package julianpraesent.gradeplanner.ui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
-import javafx.event.ActionEvent;
 import julianpraesent.gradeplanner.helper.DataHandler;
 import julianpraesent.gradeplanner.model.Course;
 import julianpraesent.gradeplanner.model.GradeEnum;
 import julianpraesent.gradeplanner.model.TypeEnum;
-import lombok.var;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
 public class Controller {
 
+    private ObservableList<String> listViewItems = FXCollections.observableArrayList();
+
     @FXML
-    private ListView lv_courses;
+    private ListView<Course> lv_courses;
 
     @FXML
     private Label lbl_courseTitle;
@@ -78,7 +77,8 @@ public class Controller {
 
     @FXML
     protected void exportCourses(ActionEvent event) {
-        this.lv_courses = new ListView();
+        // TODO: fix method
+        this.lv_courses = new ListView<>();
         Course[] courses = (Course[]) lv_courses.getItems().toArray();
         ArrayList<Course> courseList = (ArrayList<Course>) Arrays.asList(courses);
 
@@ -99,10 +99,29 @@ public class Controller {
 
     @FXML
     protected void importCourses(ActionEvent event) {
-        var importedCourses = DataHandler.loadFile("data.csv");
+        ArrayList<Course> importedCourses = DataHandler.loadFile("data.csv");
         ObservableList<Course> courses = FXCollections.observableArrayList(importedCourses);
 
-        this.lv_courses = new ListView();
-        this.lv_courses.setItems(courses);
+        this.lv_courses.getItems().addAll(courses);
+
+
+        this.lv_courses.setCellFactory(param -> new ListCell<Course>() {
+            protected void updateItem(Course course, boolean empty) {
+                super.updateItem(course, empty);
+
+                if (empty || course == null || course.getTitle() == null) setText(null);
+                else setText(course.getTitle());
+            }
+        });
+    }
+
+    @FXML
+    void createCourse(ActionEvent event) {
+        // TODO: implement method
+    }
+
+    @FXML
+    protected void quit(ActionEvent event) {
+        System.exit(0);
     }
 }
