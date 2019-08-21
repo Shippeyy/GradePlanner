@@ -5,18 +5,22 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import julianpraesent.gradeplanner.helper.Analyzer;
-import julianpraesent.gradeplanner.helper.AppConstants;
 import julianpraesent.gradeplanner.helper.DataHandler;
 import julianpraesent.gradeplanner.model.Course;
 import julianpraesent.gradeplanner.model.LoglevelEnum;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
 
     private ObservableList<String> listViewItems = FXCollections.observableArrayList();
+
+    @FXML
+    private SplitPane splitpane;
 
     @FXML
     private ListView<Course> lv_courses;
@@ -49,15 +53,24 @@ public class Controller {
     private TextArea txta_log;
 
     /**
-     * exports all courses that are displayed in the listview to a fixed path
-     *
+     * exports all courses that are displayed in the listview to a path (which is selected by the user)
      * @param event
      */
     @FXML
     protected void exportCourses(ActionEvent event) {
         List<Course> courseList = this.lv_courses.getItems();
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save data file");
+
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(filter);
+
         try {
-            DataHandler.writeFile(new ArrayList<>(courseList), AppConstants.PATH);
+            File file = fileChooser.showSaveDialog(this.splitpane.getScene().getWindow());
+            log("writing file", LoglevelEnum.INFO);
+            DataHandler.writeFile(new ArrayList<>(courseList), file.getPath());
+            log("export finished", LoglevelEnum.SUCCESS);
         } catch (Exception e) {
             log(e.getMessage(), LoglevelEnum.ERROR);
         }
@@ -65,13 +78,21 @@ public class Controller {
     }
 
     /**
-     * imports courses from a fixed path
+     * imports courses from a path (which is selected by the user)
      * @param event
      */
     @FXML
     protected void importCourses(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select data file");
+
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(filter);
+
         try {
-            ArrayList<Course> importedCourses = DataHandler.loadFile(AppConstants.PATH);
+            File file = fileChooser.showOpenDialog(this.splitpane.getScene().getWindow());
+            log("loading selected file", LoglevelEnum.INFO);
+            ArrayList<Course> importedCourses = DataHandler.loadFile(file.getPath());
             updateListview(importedCourses);
         } catch (Exception e) {
             log(e.getMessage(), LoglevelEnum.ERROR);
