@@ -7,4 +7,8 @@ public class AppConstants {
 
     // DataHandler below
     public static final String PATH = "data.csv";
+
+    // labels below
+    public static final String PREFIX_WEIGHTED_AVERAGE = "Weighted Grade Average: ";
+    public static final String PREFIX_TOTAL_ECTS = "Total ECTS: ";
 }

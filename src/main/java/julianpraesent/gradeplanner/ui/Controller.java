@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import julianpraesent.gradeplanner.helper.Analyzer;
 import julianpraesent.gradeplanner.helper.DataHandler;
+import julianpraesent.gradeplanner.helper.Helper;
 import julianpraesent.gradeplanner.model.Course;
 import julianpraesent.gradeplanner.model.LoglevelEnum;
 
@@ -117,6 +118,7 @@ public class Controller {
             }
         });
 
+        Helper.updateMetricLabels(this.lv_courses, this.lbl_avg, this.lbl_totalEcts);
         log("courses have been updated", LoglevelEnum.SUCCESS);
     }
 

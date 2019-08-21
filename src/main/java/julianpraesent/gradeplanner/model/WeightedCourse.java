@@ -14,4 +14,8 @@ public class WeightedCourse {
     private Course course;
 
     private int value;
+
+    public int getEcts() {
+        return this.course.getEcts();
+    }
 }

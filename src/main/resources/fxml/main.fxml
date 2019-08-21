@@ -68,7 +68,8 @@
       </SplitPane>
       <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
          <children>
-            <Label id="lbl_avg" maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Weighted Grade Average: 5.0000" HBox.hgrow="ALWAYS">
+             <Label fx:id="lbl_avg" maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Weighted Grade Average: 0"
+                    HBox.hgrow="ALWAYS">
                <font>
                   <Font size="11.0" fx:id="x3" />
                </font>
@@ -77,7 +78,8 @@
                </textFill>
             </Label>
             <Separator orientation="VERTICAL" prefHeight="10.0" />
-            <Label id="lbl_totalEcts" font="$x3" maxWidth="-1.0" text="Total ECTS: 180" textFill="$x4" HBox.hgrow="NEVER" />
+             <Label fx:id="lbl_totalEcts" font="$x3" maxWidth="-1.0" text="Total ECTS: 0" textFill="$x4"
+                    HBox.hgrow="NEVER"/>
          </children>
          <padding>
             <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
