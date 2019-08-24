@@ -52,6 +52,29 @@ public class Helper {
     }
 
     /**
+     * converts an integer to the according gradeEnum
+     *
+     * @param number
+     * @return
+     */
+    public static GradeEnum intToGradeEnum(int number) {
+        switch (number) {
+            case 1:
+                return GradeEnum.SEHR_GUT;
+            case 2:
+                return GradeEnum.GUT;
+            case 3:
+                return GradeEnum.BEFRIEDIGEND;
+            case 4:
+                return GradeEnum.GENUEGEND;
+            case 5:
+                return GradeEnum.NICHT_GENUEGEND;
+            default:
+                return null;
+        }
+    }
+
+    /**
      * calculates the weighted average of a list of courses
      *
      * @param weightedList list of weighted courses of which the average shall be calculated

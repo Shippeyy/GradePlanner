@@ -11,4 +11,7 @@ public class AppConstants {
     // labels below
     public static final String PREFIX_WEIGHTED_AVERAGE = "Weighted Grade Average: ";
     public static final String PREFIX_TOTAL_ECTS = "Total ECTS: ";
+
+    // textfields below
+    public static final String DEFAULT_WEIGHTED_GRADE_AVERAGE = "1.5";
 }

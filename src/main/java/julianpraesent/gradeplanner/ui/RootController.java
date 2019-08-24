@@ -3,12 +3,15 @@ package julianpraesent.gradeplanner.ui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import julianpraesent.gradeplanner.helper.Analyzer;
+import julianpraesent.gradeplanner.helper.AppConstants;
 import julianpraesent.gradeplanner.helper.DataHandler;
 import julianpraesent.gradeplanner.helper.Helper;
 import julianpraesent.gradeplanner.model.Course;
 import julianpraesent.gradeplanner.model.LoglevelEnum;
+import julianpraesent.gradeplanner.model.TypeEnum;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -31,9 +34,29 @@ public class RootController {
     @FXML
     private SplitPane splitpane;
 
+    @FXML
+    private ChoiceBox<TypeEnum> choicebox_type;
+    @FXML
+    private TextField tf_title;
 
-    public void initialize() throws Exception {
-        ArrayList<Course> courses = new ArrayList<>();
+    @FXML
+    private TextField tf_ects;
+
+    @FXML
+    private TextField tf_grade;
+
+    @FXML
+    private CheckBox chb_lock;
+
+    @FXML
+    private CheckBox chb_graded;
+
+    @FXML
+    private TextField tf_targetAverage;
+
+    public void initialize() {
+        this.choicebox_type.getItems().addAll(TypeEnum.VU, TypeEnum.VO, TypeEnum.SE, TypeEnum.UE);
+        this.tf_targetAverage.setText(AppConstants.DEFAULT_WEIGHTED_GRADE_AVERAGE);
     }
 
     /**
@@ -92,9 +115,12 @@ public class RootController {
 
         try {
             log("analysis started", LoglevelEnum.INFO);
-            ArrayList<Course> optimizedCourses = Analyzer.analyzeCourses(courses, 1);
+            double targetAverage = Double.parseDouble(this.tf_targetAverage.getText());
+            ArrayList<Course> optimizedCourses = Analyzer.analyzeCourses(courses, targetAverage);
             log("analysis finished", LoglevelEnum.INFO);
             updateListview(optimizedCourses);
+        } catch (NumberFormatException e) {
+            log("target grade average has to be a number", LoglevelEnum.ERROR);
         } catch (Exception e) {
             log(e.getMessage(), LoglevelEnum.ERROR);
         }
@@ -122,7 +148,6 @@ public class RootController {
         } catch (Exception e) {
             log(e.getMessage(), LoglevelEnum.ERROR);
         }
-
     }
 
     /**
@@ -147,23 +172,65 @@ public class RootController {
         }
     }
 
+    /**
+     * saves the selected course and any changes that were made
+     *
+     * @param event
+     */
     @FXML
     protected void saveCourse(ActionEvent event) {
-        // TODO: implement method
+        ArrayList<Course> courses = new ArrayList<>(this.lv_courses.getItems());
+        Course course = this.lv_courses.getSelectionModel().getSelectedItem();
+        try {
+            course.setTitle(this.tf_title.getText());
+            course.setEcts(Integer.parseInt(this.tf_ects.getText()));
+            course.setGrade(Helper.intToGradeEnum(Integer.parseInt(this.tf_grade.getText())));
+            course.setGraded(this.chb_graded.isSelected());
+            course.setLocked(this.chb_lock.isSelected());
+            course.setType(choicebox_type.getSelectionModel().getSelectedItem());
+
+            courses.remove(this.lv_courses.getSelectionModel().getSelectedItem());
+            courses.add(course);
+            this.updateListview(courses);
+
+        } catch (Exception e) {
+            log("Invalid input", LoglevelEnum.ERROR);
+        }
     }
 
+    /**
+     * displays the details of a course that was clicked on via the listview
+     *
+     * @param event
+     */
+    @FXML
+    protected void displaySelectedCourse(MouseEvent event) {
+        Course selectedCourse = this.lv_courses.getSelectionModel().getSelectedItem();
+
+        this.tf_title.setText(selectedCourse.getTitle());
+        this.tf_ects.setText(Integer.toString(selectedCourse.getEcts()));
+        this.tf_grade.setText(Integer.toString(Helper.gradeEnumToInt(selectedCourse.getGrade())));
+        this.choicebox_type.setValue(selectedCourse.getType());
+        this.chb_graded.setSelected(selectedCourse.isGraded());
+        this.chb_lock.setSelected(selectedCourse.isLocked());
+    }
+
+    /**
+     * deletes a selected course
+     * @param event
+     */
     @FXML
     protected void deleteCourse(ActionEvent event) {
-        // TODO: implement method
+        ArrayList<Course> courses = new ArrayList<>(this.lv_courses.getItems());
+        Course selectedCourse = this.lv_courses.getSelectionModel().getSelectedItem();
+        if (selectedCourse != null && courses.contains(selectedCourse)) {
+            courses.remove(selectedCourse);
+            this.updateListview(courses);
+        }
     }
 
     @FXML
     protected void addCourse(ActionEvent event) {
-        // TODO: implement method
-    }
-
-    @FXML
-    protected void saveAverage(ActionEvent event) {
         // TODO: implement method
     }
 }
