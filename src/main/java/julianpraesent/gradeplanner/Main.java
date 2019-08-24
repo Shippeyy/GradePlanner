@@ -9,15 +9,13 @@ import julianpraesent.gradeplanner.helper.AppConstants;
 
 public class Main extends Application {
 
-
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // TODO: implement GUI
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/root.fxml"));
         primaryStage.setTitle(AppConstants.TITLE + " - " + AppConstants.VERSION);
         primaryStage.setScene(new Scene(root, 900, 600));
 
