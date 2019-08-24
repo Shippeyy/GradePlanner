@@ -11,8 +11,8 @@
     <children>
         <HBox prefHeight="33.0" prefWidth="900.0">
             <children>
-                <Label fx:id="lbl_appHeading" prefHeight="32.0" prefWidth="234.0"
-                       text="GradePlanner v0.0.1 by Julian Präsent">
+                <Label fx:id="lbl_appHeading" prefHeight="27.0" prefWidth="237.0"
+                       text="Grade Planner v0.1.0 by Julian Präsent">
                     <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                     </HBox.margin>
@@ -22,11 +22,6 @@
                         <Insets bottom="5.0" top="5.0"/>
                     </HBox.margin>
                 </Separator>
-                <Button mnemonicParsing="false" onAction="#addCourse" text="Add Course">
-                    <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </HBox.margin>
-                </Button>
                 <Button mnemonicParsing="false" onAction="#importData" text="Import Data">
                     <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
@@ -64,20 +59,20 @@
                 </Button>
             </children>
         </HBox>
-        <SplitPane fx:id="splitpane" dividerPositions="0.6703786191536748" prefHeight="550.0" prefWidth="900.0">
+        <SplitPane fx:id="splitpane" dividerPositions="0.6704" prefHeight="550.0" prefWidth="900.0">
             <items>
                 <ListView fx:id="lv_courses" onMouseClicked="#displaySelectedCourse" prefHeight="548.0"
                           prefWidth="576.0"/>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="245.0" prefWidth="405.0">
                     <children>
-                        <Label id="lbl_courseTitle" layoutX="134.0" layoutY="11.0" text="Course Details"/>
-                        <Label id="lbl_type" layoutX="14.0" layoutY="48.0" text="Type"/>
-                        <TextField fx:id="tf_title" layoutX="110.0" layoutY="85.0"/>
-                        <Label id="lbl_title" layoutX="14.0" layoutY="90.0" text="Title"/>
-                        <ChoiceBox fx:id="choicebox_type" layoutX="111.0" layoutY="43.0" prefHeight="27.0"
+                        <Label id="lbl_courseTitle" layoutX="13.0" layoutY="11.0" text="Course Details"/>
+                        <Label id="lbl_type" layoutX="14.0" layoutY="58.0" text="Type"/>
+                        <TextField fx:id="tf_title" layoutX="110.0" layoutY="91.0"/>
+                        <Label id="lbl_title" layoutX="14.0" layoutY="96.0" text="Title"/>
+                        <ChoiceBox fx:id="choicebox_type" layoutX="111.0" layoutY="53.0" prefHeight="27.0"
                                    prefWidth="166.0"/>
-                        <Label id="lbl_ects" layoutX="14.0" layoutY="134.0" text="ECTS"/>
-                        <TextField fx:id="tf_ects" layoutX="110.0" layoutY="126.0"/>
+                        <Label id="lbl_ects" layoutX="14.0" layoutY="137.0" text="ECTS"/>
+                        <TextField fx:id="tf_ects" layoutX="110.0" layoutY="129.0"/>
                         <TextField fx:id="tf_grade" layoutX="110.0" layoutY="167.0"/>
                         <Label id="lbl_grade" layoutX="14.0" layoutY="175.0" text="Grade"/>
                         <CheckBox fx:id="chb_lock" layoutX="17.0" layoutY="212.0" mnemonicParsing="false"
@@ -92,6 +87,9 @@
                         <TextArea fx:id="txta_log" editable="false" layoutX="12.0" layoutY="310.0" prefHeight="224.0"
                                   prefWidth="267.0"/>
                         <Label layoutX="135.0" layoutY="286.0" text="Log"/>
+                        <Button layoutX="139.0" layoutY="6.0" mnemonicParsing="false" onAction="#addCourse"
+                                text="Add as new Course"/>
+                        <Separator layoutX="39.0" layoutY="42.0" prefHeight="4.0" prefWidth="200.0"/>
                     </children>
                 </AnchorPane>
             </items>

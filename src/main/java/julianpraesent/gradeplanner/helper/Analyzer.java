@@ -13,8 +13,10 @@ public class Analyzer {
 
     /**
      * analyzes a list of courses and makes suggestions in order to reach a certain weighted grade average
-     * @param courses
-     * @return
+     * @throws Exception
+     * @param courses list of courses that shall be analyzed
+     * @param targetAverage target weighted grade average that shall be achieved
+     * @return optimized list of courses
      */
     public static ArrayList<Course> analyzeCourses(ArrayList<Course> courses, double targetAverage) throws Exception {
         ArrayList<WeightedCourse> weightedCourses = weighCourses(courses);
@@ -27,9 +29,10 @@ public class Analyzer {
 
     /**
      * optimizes a list of courses in order to hit a certain target average in the easiest way possible
-     * @param weightedCourses
-     * @param targetAverage
-     * @return
+     * @throws Exception
+     * @param weightedCourses list of weighted courses that shall be optimized
+     * @param targetAverage target weighted grade average that shall be achieved
+     * @return list of optimized courses
      */
     private static ArrayList<Course> optimizeCourses(ArrayList<WeightedCourse> weightedCourses, double targetAverage) throws Exception {
         if(calcWeightedAverage(weightedCourses) <= targetAverage) return weightedCourseToCourse(weightedCourses);
@@ -49,7 +52,7 @@ public class Analyzer {
 
     /**
      * improves the grade of the given WeightedCourse by one if possible. Return null if course cannot be improved
-     * @param weightedCourse
+     * @param weightedCourse weightedCourse that shall be improved
      * @return improved weighted course
      */
     private static WeightedCourse improveWeightedCourse(WeightedCourse weightedCourse) {
@@ -80,8 +83,8 @@ public class Analyzer {
     }
 
     /**
-     * converts ArrayList<WeightedCourse> to ArrayList<Course>
-     * @param weightedCourses
+     * converts list of weighted courses to a list of courses
+     * @param weightedCourses list of weighted courses
      * @return converted list
      */
     private static ArrayList<Course> weightedCourseToCourse(ArrayList<WeightedCourse> weightedCourses) {

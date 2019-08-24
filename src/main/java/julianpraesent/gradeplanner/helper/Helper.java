@@ -31,8 +31,8 @@ public class Helper {
     /**
      * converts a gradeEnum to the according int
      *
-     * @param gradeEnum
-     * @return int value of gradeEnum
+     * @param gradeEnum input grade as gradeEnum
+     * @return converted grade as int
      */
     public static int gradeEnumToInt(GradeEnum gradeEnum) {
         switch (gradeEnum) {
@@ -54,8 +54,8 @@ public class Helper {
     /**
      * converts an integer to the according gradeEnum
      *
-     * @param number
-     * @return
+     * @param number input grade as integer
+     * @return converted grade as gradeEnum
      */
     public static GradeEnum intToGradeEnum(int number) {
         switch (number) {
@@ -80,7 +80,7 @@ public class Helper {
      * @param weightedList list of weighted courses of which the average shall be calculated
      * @return weighted average
      */
-    public static double calcWeightedAverage(ArrayList<WeightedCourse> weightedList) {
+    static double calcWeightedAverage(ArrayList<WeightedCourse> weightedList) {
         int sum = weightedList.stream().mapToInt(WeightedCourse::getValue).sum();
         int ects = weightedList.stream().mapToInt(WeightedCourse::getEcts).sum();
 
@@ -93,7 +93,7 @@ public class Helper {
      * @param courses list of courses which shall be weighed
      * @return list of weighted courses
      */
-    public static ArrayList<WeightedCourse> weighCourses(ArrayList<Course> courses) {
+    static ArrayList<WeightedCourse> weighCourses(ArrayList<Course> courses) {
         ArrayList<WeightedCourse> weightedCourses = new ArrayList<>();
 
         for (Course course : courses) {
@@ -102,5 +102,14 @@ public class Helper {
         }
 
         return weightedCourses;
+    }
+
+    /**
+     * @return the current application name, version and main author
+     */
+    public static String getApplicationHeader() {
+        return AppConstants.APPLICATION_TITLE + " "
+                + AppConstants.APPLICATION_VERSION + " by "
+                + AppConstants.APPLICATION_AUTHOR;
     }
 }

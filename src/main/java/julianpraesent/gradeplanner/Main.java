@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import julianpraesent.gradeplanner.helper.AppConstants;
+import julianpraesent.gradeplanner.helper.Helper;
 
 public class Main extends Application {
 
@@ -16,7 +16,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/root.fxml"));
-        primaryStage.setTitle(AppConstants.TITLE + " - " + AppConstants.VERSION);
+        primaryStage.setTitle(Helper.getApplicationHeader());
         primaryStage.setScene(new Scene(root, 900, 600));
 
         primaryStage.show();

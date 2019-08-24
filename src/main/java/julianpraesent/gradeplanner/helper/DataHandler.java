@@ -15,8 +15,8 @@ public class DataHandler {
     /**
      * reads a csv file from a given path and converts it into a list of type Course
      * @throws Exception
-     * @param path
-     * @return converted csv file
+     * @param path path of the input file
+     * @return list of loaded courses
      */
     public static ArrayList<Course> loadFile(String path) throws Exception {
         ArrayList<Course> courses = new ArrayList<Course>();
@@ -44,8 +44,8 @@ public class DataHandler {
     /**
      * writes a csv file to a given path with a list of courses
      * @throws Exception
-     * @param courses
-     * @param path
+     * @param courses list of courses that shall be written to the specified file
+     * @param path path of the export file
      */
     public static void writeFile(ArrayList<Course> courses, String path) throws Exception {
 

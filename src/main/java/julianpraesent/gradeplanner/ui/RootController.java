@@ -16,8 +16,12 @@ import julianpraesent.gradeplanner.model.TypeEnum;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class RootController {
+
+    @FXML
+    private Label lbl_appHeading;
 
     @FXML
     private ListView<Course> lv_courses;
@@ -54,7 +58,12 @@ public class RootController {
     @FXML
     private TextField tf_targetAverage;
 
+    /**
+     * initializes the ui; is automatically called as first method by javafx
+     */
     public void initialize() {
+        this.lbl_appHeading.setText(Helper.getApplicationHeader());
+
         this.choicebox_type.getItems().addAll(TypeEnum.VU, TypeEnum.VO, TypeEnum.SE, TypeEnum.UE);
         this.tf_targetAverage.setText(AppConstants.DEFAULT_WEIGHTED_GRADE_AVERAGE);
     }
@@ -62,7 +71,7 @@ public class RootController {
     /**
      * updates the entries of the listview in the ui (existing content will be deleted)
      *
-     * @param courses
+     * @param courses list of courses that shall be displayed
      */
     public void updateListview(ArrayList<Course> courses) {
         this.lv_courses.getItems().clear();
@@ -84,8 +93,8 @@ public class RootController {
     /**
      * logs a given text with a certain prefix (according to the given loglevel) to the ui
      *
-     * @param message
-     * @param loglevel
+     * @param message message that shall be displayed
+     * @param loglevel loglevel for the according log prefix
      */
     @FXML
     public void log(String message, LoglevelEnum loglevel) {
@@ -93,13 +102,13 @@ public class RootController {
 
         switch (loglevel) {
             case INFO:
-                prefix = "INFO - ";
+                prefix = AppConstants.PREFIX_LOGLEVEL_INFO;
                 break;
             case SUCCESS:
-                prefix = "SUCCESS - ";
+                prefix = AppConstants.PREFIX_LOGLEVEL_SUCCESS;
                 break;
             case ERROR:
-                prefix = "ERROR - ";
+                prefix = AppConstants.PREFIX_LOGLEVEL_ERROR;
         }
         this.txta_log.appendText(prefix + message + "\n");
     }
@@ -107,7 +116,7 @@ public class RootController {
     /**
      * analyses the loaded courses
      *
-     * @param event
+     * @param event the event that was triggered by the user
      */
     @FXML
     protected void analyze(ActionEvent event) {
@@ -128,7 +137,7 @@ public class RootController {
 
     /**
      * exports all courses that are displayed in the listview to a path (which is selected by the user)
-     * @param event
+     * @param event the event that was triggered by the user
      */
     @FXML
     protected void exportData(ActionEvent event) {
@@ -152,7 +161,7 @@ public class RootController {
 
     /**
      * imports courses from a path (which is selected by the user)
-     * @param event
+     * @param event the event that was triggered by the user
      */
     @FXML
     protected void importData(ActionEvent event) {
@@ -175,7 +184,7 @@ public class RootController {
     /**
      * saves the selected course and any changes that were made
      *
-     * @param event
+     * @param event the event that was triggered by the user
      */
     @FXML
     protected void saveCourse(ActionEvent event) {
@@ -194,18 +203,19 @@ public class RootController {
             this.updateListview(courses);
 
         } catch (Exception e) {
-            log("Invalid input", LoglevelEnum.ERROR);
+            log("invalid input", LoglevelEnum.ERROR);
         }
     }
 
     /**
      * displays the details of a course that was clicked on via the listview
      *
-     * @param event
+     * @param event the event that was triggered by the user
      */
     @FXML
     protected void displaySelectedCourse(MouseEvent event) {
         Course selectedCourse = this.lv_courses.getSelectionModel().getSelectedItem();
+        if (selectedCourse == null) return;
 
         this.tf_title.setText(selectedCourse.getTitle());
         this.tf_ects.setText(Integer.toString(selectedCourse.getEcts()));
@@ -217,7 +227,7 @@ public class RootController {
 
     /**
      * deletes a selected course
-     * @param event
+     * @param event the event that was triggered by the user
      */
     @FXML
     protected void deleteCourse(ActionEvent event) {
@@ -229,8 +239,32 @@ public class RootController {
         }
     }
 
+    /**
+     * adds a new course to the listview
+     *
+     * @param event the event that was triggered by the user
+     */
     @FXML
     protected void addCourse(ActionEvent event) {
-        // TODO: implement method
+        try {
+            Course course = Course.builder()
+                    .id(UUID.randomUUID().toString())
+                    .title(this.tf_title.getText())
+                    .ects(Integer.parseInt(this.tf_ects.getText()))
+                    .grade(Helper.intToGradeEnum(Integer.parseInt(this.tf_grade.getText())))
+                    .graded(this.chb_graded.isSelected())
+                    .locked(this.chb_lock.isSelected())
+                    .type(choicebox_type.getSelectionModel().getSelectedItem())
+                    .build();
+
+            ArrayList<Course> courses = new ArrayList<>(this.lv_courses.getItems());
+            courses.add(course);
+
+            updateListview(courses);
+            log("course was added", LoglevelEnum.SUCCESS);
+        } catch (Exception e) {
+            log("invalid input", LoglevelEnum.ERROR);
+        }
+
     }
 }
