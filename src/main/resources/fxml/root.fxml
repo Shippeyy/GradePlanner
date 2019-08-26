@@ -62,7 +62,7 @@
         <SplitPane fx:id="splitpane" dividerPositions="0.6704" prefHeight="550.0" prefWidth="900.0">
             <items>
                 <ListView fx:id="lv_courses" onMouseClicked="#displaySelectedCourse" prefHeight="548.0"
-                          prefWidth="576.0"/>
+                          prefWidth="576.0" SplitPane.resizableWithParent="false"/>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="245.0" prefWidth="405.0">
                     <children>
                         <Label id="lbl_courseTitle" layoutX="13.0" layoutY="11.0" text="Course Details"/>

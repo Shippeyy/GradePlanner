@@ -74,17 +74,11 @@ public class RootController {
      * @param courses list of courses that shall be displayed
      */
     public void updateListview(ArrayList<Course> courses) {
+        // TODO: adapt according to https://github.com/turais/TuraisJavaFxExamples/tree/master/src/de/turais/samples
+
         this.lv_courses.getItems().clear();
         this.lv_courses.getItems().addAll(courses);
-
-        this.lv_courses.setCellFactory(param -> new ListCell<Course>() {
-            protected void updateItem(Course course, boolean empty) {
-                super.updateItem(course, empty);
-
-                if (empty || course == null || course.getTitle() == null) setText(null);
-                else setText(course.getTitle());
-            }
-        });
+        this.lv_courses.setCellFactory(param -> new ListviewCell());
 
         Helper.updateMetricLabels(this.lv_courses, this.lbl_avg, this.lbl_totalEcts);
         log("courses have been updated", LoglevelEnum.SUCCESS);

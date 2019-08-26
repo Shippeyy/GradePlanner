@@ -1,6 +1,9 @@
 package julianpraesent.gradeplanner.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Builder
@@ -21,4 +24,6 @@ public class Course {
     private boolean graded;
 
     private boolean locked;
+
+    private boolean modified;
 }

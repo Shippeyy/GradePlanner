@@ -76,10 +76,14 @@ public class Analyzer {
                 return null;
         }
 
-        return WeightedCourse.builder()
+        WeightedCourse output = WeightedCourse.builder()
                 .course(weightedCourse.getCourse())
                 .value(weightedCourse.getCourse().getEcts() * gradeEnumToInt(weightedCourse.getCourse().getGrade()))
                 .build();
+
+        output.getCourse().setModified(true);
+
+        return output;
     }
 
     /**
