@@ -2,9 +2,13 @@ package julianpraesent.gradeplanner.helper;
 
 public class AppConstants {
 
-    public static final String APPLICATION_TITLE = "Grade Planner";
-    public static final String APPLICATION_AUTHOR = "Julian Präsent";
-    public static final String APPLICATION_VERSION = "v0.1.0";
+    // app below
+    static final String APPLICATION_TITLE = "Grade Planner";
+    static final String APPLICATION_AUTHOR = "Julian Präsent";
+    static final String APPLICATION_VERSION = "v0.1.0";
+
+    // helper below
+    static final int GRADE_ENUM_NIL = -1;
 
     // logger below
     private static final String PREFIX_LOGLEVEL_SYMBOL = "- ";

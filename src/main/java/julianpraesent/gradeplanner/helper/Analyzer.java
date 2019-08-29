@@ -74,6 +74,8 @@ public class Analyzer {
                 break;
             case SEHR_GUT:
                 return null;
+            case TEILGENOMMEN_ERFOLGREICH:
+                return null;
         }
 
         WeightedCourse output = WeightedCourse.builder()
