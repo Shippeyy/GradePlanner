@@ -169,6 +169,11 @@ public class RootController {
             File file = fileChooser.showOpenDialog(this.splitpane.getScene().getWindow());
             log("loading selected file", LoglevelEnum.INFO);
             ArrayList<Course> importedCourses = DataHandler.loadFile(file.getPath());
+            // in case the user cancelled or closed the file chooser
+            if (importedCourses == null) {
+                log("file selection cancelled by user", LoglevelEnum.INFO);
+                return;
+            }
             updateListview(importedCourses);
         } catch (Exception e) {
             log(e.getMessage(), LoglevelEnum.ERROR);

@@ -129,9 +129,7 @@ public class Helper {
         for (Course course : courses) {
             if (gradeEnumToInt(course.getGrade()) == AppConstants.GRADE_ENUM_NIL)
                 course.setGrade(GradeEnum.NICHT_GENUEGEND);
-
-            if (gradeEnumToInt(course.getGrade()) == 0) weightedCourses.add(new WeightedCourse(course, 0));
-            else weightedCourses.add(new WeightedCourse(course, course.getEcts() * gradeEnumToInt(course.getGrade())));
+            weightedCourses.add(new WeightedCourse(course, course.getEcts() * gradeEnumToInt(course.getGrade())));
         }
 
         return weightedCourses;

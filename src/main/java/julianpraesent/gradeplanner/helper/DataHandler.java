@@ -19,31 +19,34 @@ public class DataHandler {
 
     /**
      * reads a csv file from a given path and converts it into a list of courses
-     * @throws IOException
      * @param path path of the input file
      * @return list of loaded courses
      */
-    public static ArrayList<Course> loadFile(String path) throws IOException {
-        ArrayList<Course> courses = new ArrayList<Course>();
+    public static ArrayList<Course> loadFile(String path) {
+        ArrayList<Course> courses = new ArrayList<>();
 
-        Scanner scanner = new Scanner(new File(path));
-        while (scanner.hasNextLine()) {
-            String[] data = scanner.nextLine().split(";");
+        try {
+            Scanner scanner = new Scanner(new File(path));
+            while (scanner.hasNextLine()) {
+                String[] data = scanner.nextLine().split(";");
 
-            Course helper = Course.builder()
-                    .id(data[0])
-                    .title(data[1])
-                    .type(TypeEnum.valueOf(data[2]))
-                    .ects(Integer.parseInt(data[3]))
-                    .grade(GradeEnum.valueOf(data[4]))
-                    .graded(Boolean.parseBoolean(data[5]))
-                    .locked(Boolean.parseBoolean(data[6]))
-                    .build();
+                Course helper = Course.builder()
+                        .id(data[0])
+                        .title(data[1])
+                        .type(TypeEnum.valueOf(data[2]))
+                        .ects(Integer.parseInt(data[3]))
+                        .grade(GradeEnum.valueOf(data[4]))
+                        .graded(Boolean.parseBoolean(data[5]))
+                        .locked(Boolean.parseBoolean(data[6]))
+                        .build();
 
-            courses.add(helper);
+                courses.add(helper);
+            }
+
+            return courses;
+        } catch (IOException e) {
+            return null;
         }
-
-        return courses;
     }
 
     /**
@@ -82,7 +85,6 @@ public class DataHandler {
 
     /**
      * reads the certificate XLSX export from the TISS website and converts it into a list of courses
-     *
      * @param path path of the input file
      * @return list of loaded courses
      * @throws IOException
