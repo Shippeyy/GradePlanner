@@ -169,6 +169,34 @@ public class RootController {
             File file = fileChooser.showOpenDialog(this.splitpane.getScene().getWindow());
             log("loading selected file", LoglevelEnum.INFO);
             ArrayList<Course> importedCourses = DataHandler.loadFile(file.getPath());
+            // in case the user cancelled or closed the file chooser
+            if (importedCourses == null) {
+                log("file selection cancelled by user", LoglevelEnum.INFO);
+                return;
+            }
+            updateListview(importedCourses);
+        } catch (Exception e) {
+            log(e.getMessage(), LoglevelEnum.ERROR);
+        }
+    }
+
+    /**
+     * import courses from a TISS export file (TISS is a platform of the Technical University of Vienna)
+     *
+     * @param event the event that was triggered by the user
+     */
+    @FXML
+    protected void importTissData(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select TISS export file");
+
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("XLSX files (*.xlsx)", "*.xlsx");
+        fileChooser.getExtensionFilters().add(filter);
+
+        try {
+            File file = fileChooser.showOpenDialog(this.splitpane.getScene().getWindow());
+            log("loading selected file", LoglevelEnum.INFO);
+            ArrayList<Course> importedCourses = DataHandler.loadTissXlsx(file.getPath());
             updateListview(importedCourses);
         } catch (Exception e) {
             log(e.getMessage(), LoglevelEnum.ERROR);

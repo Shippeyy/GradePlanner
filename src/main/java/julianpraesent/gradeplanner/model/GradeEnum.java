@@ -5,5 +5,6 @@ public enum GradeEnum {
     GUT,
     BEFRIEDIGEND,
     GENUEGEND,
-    NICHT_GENUEGEND
+    NICHT_GENUEGEND,
+    TEILGENOMMEN_ERFOLGREICH,
 }

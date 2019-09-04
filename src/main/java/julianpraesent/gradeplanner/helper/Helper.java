@@ -4,6 +4,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import julianpraesent.gradeplanner.model.Course;
 import julianpraesent.gradeplanner.model.GradeEnum;
+import julianpraesent.gradeplanner.model.TypeEnum;
 import julianpraesent.gradeplanner.model.WeightedCourse;
 
 import java.util.ArrayList;
@@ -36,6 +37,8 @@ public class Helper {
      */
     public static int gradeEnumToInt(GradeEnum gradeEnum) {
         switch (gradeEnum) {
+            case TEILGENOMMEN_ERFOLGREICH:
+                return 0;
             case SEHR_GUT:
                 return 1;
             case GUT:
@@ -47,7 +50,7 @@ public class Helper {
             case NICHT_GENUEGEND:
                 return 5;
             default:
-                return 0;
+                return -1;
         }
     }
 
@@ -59,6 +62,8 @@ public class Helper {
      */
     public static GradeEnum intToGradeEnum(int number) {
         switch (number) {
+            case 0:
+                return GradeEnum.TEILGENOMMEN_ERFOLGREICH;
             case 1:
                 return GradeEnum.SEHR_GUT;
             case 2:
@@ -69,6 +74,31 @@ public class Helper {
                 return GradeEnum.GENUEGEND;
             case 5:
                 return GradeEnum.NICHT_GENUEGEND;
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * converts a string to the according typeEnum
+     *
+     * @param type typEnum as a string
+     * @return converted type as a typeEnum
+     */
+    static TypeEnum stringToTypeEnum(String type) {
+        switch (type) {
+            case "VO":
+                return TypeEnum.VO;
+
+            case "VU":
+                return TypeEnum.VU;
+
+            case "UE":
+                return TypeEnum.UE;
+
+            case "SE":
+                return TypeEnum.SE;
+
             default:
                 return null;
         }
@@ -97,7 +127,8 @@ public class Helper {
         ArrayList<WeightedCourse> weightedCourses = new ArrayList<>();
 
         for (Course course : courses) {
-            if (gradeEnumToInt(course.getGrade()) == 0) course.setGrade(GradeEnum.NICHT_GENUEGEND);
+            if (gradeEnumToInt(course.getGrade()) == AppConstants.GRADE_ENUM_NIL)
+                course.setGrade(GradeEnum.NICHT_GENUEGEND);
             weightedCourses.add(new WeightedCourse(course, course.getEcts() * gradeEnumToInt(course.getGrade())));
         }
 

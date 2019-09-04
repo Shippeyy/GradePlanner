@@ -27,6 +27,11 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                     </HBox.margin>
                 </Button>
+                <Button mnemonicParsing="false" onAction="#importTissData" text="Import TISS XLSX">
+                    <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </HBox.margin>
+                </Button>
                 <Button mnemonicParsing="false" onAction="#exportData" text="Export Data">
                     <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
@@ -39,7 +44,7 @@
                 </Separator>
                 <Label prefHeight="27.0" prefWidth="146.0" text="Target Grade Average: ">
                     <HBox.margin>
-                        <Insets bottom="5.0" right="5.0" top="5.0"/>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                     </HBox.margin>
                 </Label>
                 <TextField fx:id="tf_targetAverage" prefHeight="27.0" prefWidth="46.0">
@@ -65,31 +70,31 @@
                           prefWidth="576.0" SplitPane.resizableWithParent="false"/>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="245.0" prefWidth="405.0">
                     <children>
-                        <Label id="lbl_courseTitle" layoutX="13.0" layoutY="11.0" text="Course Details"/>
-                        <Label id="lbl_type" layoutX="14.0" layoutY="58.0" text="Type"/>
-                        <TextField fx:id="tf_title" layoutX="110.0" layoutY="91.0"/>
-                        <Label id="lbl_title" layoutX="14.0" layoutY="96.0" text="Title"/>
-                        <ChoiceBox fx:id="choicebox_type" layoutX="111.0" layoutY="53.0" prefHeight="27.0"
+                        <Label id="lbl_courseTitle" layoutX="101.0" layoutY="14.0" text="Course Details"/>
+                        <Label id="lbl_type" layoutX="14.0" layoutY="53.0" text="Type"/>
+                        <TextField fx:id="tf_title" layoutX="110.0" layoutY="86.0"/>
+                        <Label id="lbl_title" layoutX="14.0" layoutY="91.0" text="Title"/>
+                        <ChoiceBox fx:id="choicebox_type" layoutX="111.0" layoutY="48.0" prefHeight="27.0"
                                    prefWidth="166.0"/>
-                        <Label id="lbl_ects" layoutX="14.0" layoutY="137.0" text="ECTS"/>
-                        <TextField fx:id="tf_ects" layoutX="110.0" layoutY="129.0"/>
-                        <TextField fx:id="tf_grade" layoutX="110.0" layoutY="167.0"/>
-                        <Label id="lbl_grade" layoutX="14.0" layoutY="175.0" text="Grade"/>
-                        <CheckBox fx:id="chb_lock" layoutX="17.0" layoutY="212.0" mnemonicParsing="false"
+                        <Label id="lbl_ects" layoutX="14.0" layoutY="132.0" text="ECTS"/>
+                        <TextField fx:id="tf_ects" layoutX="110.0" layoutY="124.0"/>
+                        <TextField fx:id="tf_grade" layoutX="110.0" layoutY="162.0"/>
+                        <Label id="lbl_grade" layoutX="14.0" layoutY="170.0" text="Grade"/>
+                        <CheckBox fx:id="chb_lock" layoutX="17.0" layoutY="207.0" mnemonicParsing="false"
                                   text="lock grade"/>
-                        <CheckBox fx:id="chb_graded" layoutX="18.0" layoutY="248.0" mnemonicParsing="false"
+                        <CheckBox fx:id="chb_graded" layoutX="18.0" layoutY="243.0" mnemonicParsing="false"
                                   text="graded"/>
-                        <Button id="btn_save" layoutX="212.0" layoutY="208.0" mnemonicParsing="false"
+                        <Button id="btn_save" layoutX="123.0" layoutY="203.0" mnemonicParsing="false"
                                 onAction="#saveCourse" text="Save"/>
-                        <Separator layoutX="52.0" layoutY="279.0" prefHeight="1.0" prefWidth="200.0"/>
-                        <Button id="btn_delete" layoutX="207.0" layoutY="244.0" mnemonicParsing="false"
+                        <Separator layoutX="52.0" layoutY="278.0" prefHeight="1.0" prefWidth="200.0"/>
+                        <Button id="btn_delete" layoutX="210.0" layoutY="203.0" mnemonicParsing="false"
                                 onAction="#deleteCourse" text="Delete"/>
                         <TextArea fx:id="txta_log" editable="false" layoutX="12.0" layoutY="310.0" prefHeight="224.0"
                                   prefWidth="267.0"/>
                         <Label layoutX="135.0" layoutY="286.0" text="Log"/>
-                        <Button layoutX="139.0" layoutY="6.0" mnemonicParsing="false" onAction="#addCourse"
-                                text="Add as new Course"/>
-                        <Separator layoutX="39.0" layoutY="42.0" prefHeight="4.0" prefWidth="200.0"/>
+                        <Button layoutX="121.0" layoutY="239.0" mnemonicParsing="false" onAction="#addCourse"
+                                prefHeight="27.0" prefWidth="146.0" text="Add as new Course"/>
+                        <Separator layoutX="39.0" layoutY="37.0" prefHeight="4.0" prefWidth="200.0"/>
                     </children>
                 </AnchorPane>
             </items>

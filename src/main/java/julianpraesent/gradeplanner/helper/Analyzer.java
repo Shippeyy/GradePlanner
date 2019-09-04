@@ -19,9 +19,8 @@ public class Analyzer {
      * @return optimized list of courses
      */
     public static ArrayList<Course> analyzeCourses(ArrayList<Course> courses, double targetAverage) throws Exception {
-        ArrayList<WeightedCourse> weightedCourses = weighCourses(courses);
-
-        weightedCourses.sort(Comparator.comparing(WeightedCourse::getValue));
+        ArrayList<Course> positiveCourses = removeNegativeGrades(courses);
+        ArrayList<WeightedCourse> weightedCourses = weighCourses(positiveCourses);
 
         if(calcWeightedAverage(weightedCourses) <= targetAverage) return weightedCourseToCourse(weightedCourses);
         else return optimizeCourses(weightedCourses, targetAverage);
@@ -35,19 +34,39 @@ public class Analyzer {
      * @return list of optimized courses
      */
     private static ArrayList<Course> optimizeCourses(ArrayList<WeightedCourse> weightedCourses, double targetAverage) throws Exception {
-        if(calcWeightedAverage(weightedCourses) <= targetAverage) return weightedCourseToCourse(weightedCourses);
-        WeightedCourse improvedWeightedCourse = null;
+        // TODO: check if there is a more elegant solution
+        weightedCourses.sort(Comparator.comparing(WeightedCourse::getValue));
+        for (int i = weightedCourses.size() - 1; i >= 0; i--) {
+            WeightedCourse weightedCourse = weightedCourses.get(i);
 
-        // TODO: check if loop can be simplified
-        for(WeightedCourse weightedCourse: weightedCourses) {
-            if(improvedWeightedCourse != null) break;
-            if(weightedCourse.getCourse().isLocked()) continue;
-            improvedWeightedCourse = improveWeightedCourse(weightedCourses.get(weightedCourses.size()-1));
-            weightedCourses.set(weightedCourses.size()-1, improvedWeightedCourse);
+            if (weightedCourse.getCourse().getGrade() == GradeEnum.SEHR_GUT ||
+                    weightedCourse.getCourse().getGrade() == GradeEnum.TEILGENOMMEN_ERFOLGREICH
+            ) continue;
+
+            if (calcWeightedAverage(weightedCourses) <= targetAverage) return weightedCourseToCourse(weightedCourses);
+
+            weightedCourse = improveWeightedCourse(weightedCourse);
+            if (weightedCourse.getCourse().getGrade() == null)
+                throw new Exception("ERROR - a fatal program error has occured, please contact the developer (getImprovedError = null)");
+            weightedCourses.set(i, weightedCourse);
+            weightedCourses = weighCourses(weightedCourseToCourse(weightedCourses));
+            weightedCourses.sort(Comparator.comparing(WeightedCourse::getValue));
+            i = weightedCourses.size();
         }
-        // if no course can be improved
-        if(improvedWeightedCourse == null) throw new Exception("All courses are already optimized, target average is unreachable!");
-        return optimizeCourses(weightedCourses, targetAverage);
+        throw new Exception("All courses are already optimized, target average is unreachable!");
+    }
+
+    /**
+     * improves all courses that have a negative grade by one grade
+     *
+     * @param courses list of courses that may contain negative grades
+     * @return list of courses without negative grades
+     */
+    private static ArrayList<Course> removeNegativeGrades(ArrayList<Course> courses) {
+        for (Course course : courses) {
+            if (course.getGrade() == GradeEnum.NICHT_GENUEGEND) course.setGrade(GradeEnum.GENUEGEND);
+        }
+        return courses;
     }
 
     /**
