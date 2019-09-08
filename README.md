@@ -10,7 +10,7 @@
 The program was initially created for students of the Technical University of Vienna (aka TU Wien) but can be used by any student really. <br>
 Although grading systems, course types and the app language is designed to be used by students of the TU Wien all of these things can be adapted if the demand arises (see section "Contributing") <br>
 
-![alt application](docs/application.png)
+![alt application](docs/images/application.png)
 
 ## Prerequisites
 
@@ -25,14 +25,30 @@ java -jar GradePlanner.jar
 ## Features
 
 ### Create new courses
-
-### Update / Delete courses
+The application was designed as a single page application, therefore the creation of courses is integrated into the detail view section. <br>
+Simply fill in the data and click the highlighted button. <br>
+![alt create-course](docs/images/create-course.png)
 
 ### Import / Export data
+Data can be imported and exported as CSV files via the accordingly named buttons. Please be aware that manually editing the exported file can cause problems when importing the file. <br>
+The exported file has the following data structure (example given): <br>
+```java
+ID;Course Title;Type;ECTS;Grade;Graded;Locked;Modified
+```
+```java
+c3b62dcf-0883-40ba-8589-fb236fa74e49;Test Course 1;VU;10;GENUEGEND;false;false;false
+5d4cc316-e76e-4cde-bb31-0a8f50687f47;Test Course 2;VU;10;SEHR_GUT;false;false;false
+
+```
 
 ### Import TISS data
+Students from the TU Wien can easily import their already certified courses. In order to to so, the XLSX from the TISS platform has to be downloaded and imported via the application.
+![alt tiss-download](docs/images/tiss_blurred.png)
 
 ### Analysis and Color Coding
+After a target weighted grade average was entered the analysis and optimization process of the courses can be started by clicking the button "Analyze" in the top right corner. <br>
+This process might take some time and will update the list of courses and log a message once it is finished. All courses are color coded in the following way: 
+![alt tiss-download](docs/images/color-codes.png)
 
 ## Author
 
