@@ -38,6 +38,7 @@ public class DataHandler {
                         .grade(GradeEnum.valueOf(data[4]))
                         .graded(Boolean.parseBoolean(data[5]))
                         .locked(Boolean.parseBoolean(data[6]))
+                        .modified(Boolean.parseBoolean(data[7]))
                         .build();
 
                 courses.add(helper);
@@ -76,6 +77,8 @@ public class DataHandler {
             exportedCourse.append(course.isGraded());
             exportedCourse.append(";");
             exportedCourse.append(course.isLocked());
+            exportedCourse.append(";");
+            exportedCourse.append(course.isModified());
 
             printWriter.println(exportedCourse);
         }
@@ -110,6 +113,7 @@ public class DataHandler {
                     .grade(Helper.intToGradeEnum((int) row.getCell(5).getNumericCellValue()))
                     .graded(true)
                     .locked(false)
+                    .modified(false)
                     .build();
 
             courses.add(helper);
