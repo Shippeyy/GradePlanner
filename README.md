@@ -17,9 +17,10 @@ Although grading systems, course types and the app language is designed to be us
 * Java Runtime Environment 11 or higher
 
 ## Usage
+open a terminal / cmd in the root directory and type the following:
 
 ```sh
-java -jar GradePlanner.jar
+java -jar GradePlanner-1.0.0.jar
 ```
 
 ## Features
