@@ -5,4 +5,5 @@ public enum TypeEnum {
     VU,
     UE,
     SE,
+    PR,
 }

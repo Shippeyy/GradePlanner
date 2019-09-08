@@ -35,9 +35,9 @@ public class Helper {
      * @param gradeEnum input grade as gradeEnum
      * @return converted grade as int
      */
-    public static int gradeEnumToInt(GradeEnum gradeEnum) {
+    static int gradeEnumToInt(GradeEnum gradeEnum) {
         switch (gradeEnum) {
-            case TEILGENOMMEN_ERFOLGREICH:
+            case ERFOLGREICH_TEILGENOMMEN:
                 return 0;
             case SEHR_GUT:
                 return 1;
@@ -60,10 +60,10 @@ public class Helper {
      * @param number input grade as integer
      * @return converted grade as gradeEnum
      */
-    public static GradeEnum intToGradeEnum(int number) {
+    static GradeEnum intToGradeEnum(int number) {
         switch (number) {
             case 0:
-                return GradeEnum.TEILGENOMMEN_ERFOLGREICH;
+                return GradeEnum.ERFOLGREICH_TEILGENOMMEN;
             case 1:
                 return GradeEnum.SEHR_GUT;
             case 2:

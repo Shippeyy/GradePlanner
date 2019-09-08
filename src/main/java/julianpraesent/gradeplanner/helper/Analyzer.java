@@ -13,7 +13,7 @@ public class Analyzer {
 
     /**
      * analyzes a list of courses and makes suggestions in order to reach a certain weighted grade average
-     * @throws Exception
+     * @throws Exception if courses cannot be optimized
      * @param courses list of courses that shall be analyzed
      * @param targetAverage target weighted grade average that shall be achieved
      * @return optimized list of courses
@@ -28,7 +28,8 @@ public class Analyzer {
 
     /**
      * optimizes a list of courses in order to hit a certain target average in the easiest way possible
-     * @throws Exception
+     * @throws Exception if improveWeightedGrade() returns null
+     * @throws Exception if the target average is unreachable
      * @param weightedCourses list of weighted courses that shall be optimized
      * @param targetAverage target weighted grade average that shall be achieved
      * @return list of optimized courses
@@ -40,14 +41,14 @@ public class Analyzer {
             WeightedCourse weightedCourse = weightedCourses.get(i);
 
             if (weightedCourse.getCourse().getGrade() == GradeEnum.SEHR_GUT ||
-                    weightedCourse.getCourse().getGrade() == GradeEnum.TEILGENOMMEN_ERFOLGREICH
+                    weightedCourse.getCourse().getGrade() == GradeEnum.ERFOLGREICH_TEILGENOMMEN
             ) continue;
 
             if (calcWeightedAverage(weightedCourses) <= targetAverage) return weightedCourseToCourse(weightedCourses);
 
             weightedCourse = improveWeightedCourse(weightedCourse);
             if (weightedCourse.getCourse().getGrade() == null)
-                throw new Exception("ERROR - a fatal program error has occured, please contact the developer (getImprovedError = null)");
+                throw new Exception("ERROR - a fatal program error has occured, please contact the developer (improveWeightedGrade = null)");
             weightedCourses.set(i, weightedCourse);
             weightedCourses = weighCourses(weightedCourseToCourse(weightedCourses));
             weightedCourses.sort(Comparator.comparing(WeightedCourse::getValue));
