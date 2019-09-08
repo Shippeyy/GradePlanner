@@ -11,7 +11,7 @@ import julianpraesent.gradeplanner.model.Course;
 
 import java.io.IOException;
 
-public class ListviewCell extends ListCell<Course> {
+class ListviewCell extends ListCell<Course> {
 
 
     @FXML
@@ -55,7 +55,7 @@ public class ListviewCell extends ListCell<Course> {
             else {
                 switch (course.getGrade()) {
                     case SEHR_GUT:
-                        this.circle_listviewStatusIndicator.setFill(Color.GREEN);
+                        this.circle_listviewStatusIndicator.setFill(Color.LIGHTGREEN);
                         break;
 
                     case NICHT_GENUEGEND:
