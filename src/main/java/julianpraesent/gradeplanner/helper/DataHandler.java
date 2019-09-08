@@ -51,7 +51,7 @@ public class DataHandler {
 
     /**
      * writes a csv file to a given path with a list of courses
-     * @throws IOException
+     * @throws IOException if the given file does not exist
      * @param courses list of courses that shall be written to the specified file
      * @param path path of the export file
      */
@@ -87,7 +87,7 @@ public class DataHandler {
      * reads the certificate XLSX export from the TISS website and converts it into a list of courses
      * @param path path of the input file
      * @return list of loaded courses
-     * @throws IOException
+     * @throws IOException if the given file does not exist
      */
     public static ArrayList<Course> loadTissXlsx(String path) throws IOException {
         Workbook workbook = WorkbookFactory.create(new File(path));
