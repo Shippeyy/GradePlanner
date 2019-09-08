@@ -1,6 +1,6 @@
 <h1 align="center">Project GradePlanner</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-v0.1.0-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-v1.0.0-green.svg?cacheSeconds=2592000" />
   <a href="https://www.gnu.org/licenses/gpl-3.0.de.html">
     <img alt="License: GNU General Public License v3.0" src="https://img.shields.io/badge/License-GNU General Public License v3.0-yellow.svg" target="_blank" />
   </a>
@@ -17,9 +17,10 @@ Although grading systems, course types and the app language is designed to be us
 * Java Runtime Environment 11 or higher
 
 ## Usage
+open a terminal / cmd in the root directory and type the following:
 
 ```sh
-java -jar GradePlanner.jar
+java -jar GradePlanner-1.0.0.jar
 ```
 
 ## Features
